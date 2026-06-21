@@ -1,0 +1,13 @@
+project_id = ""
+
+[functions.admin_create_admin]
+enabled = true
+verify_jwt = true
+import_map = "./functions/admin_create_admin/deno.json"
+entrypoint = "./functions/admin_create_admin/index.ts"
+
+[functions.merchant_logo_signed_url]
+enabled = true
+verify_jwt = true
+import_map = "./functions/merchant_logo_signed_url/deno.json"
+entrypoint = "./functions/merchant_logo_signed_url/index.ts"

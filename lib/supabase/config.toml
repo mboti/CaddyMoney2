@@ -1,0 +1,107 @@
+
+[functions.merchant_create_pending]
+enabled = true
+# This function is called during merchant registration, and in many Supabase setups
+# signUp() returns `session == null` until the user confirms their email.
+# With no JWT available, verify_jwt must be disabled or the request is rejected
+# before your function code runs.
+verify_jwt = false
+import_map = "./functions/merchant_create_pending/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/merchant_create_pending/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/merchant_create_pending/*.html" ]
+
+[functions.postal-cities]
+enabled = true
+# This function is called during merchant registration (user not authenticated yet).
+# If verify_jwt is true, Supabase rejects the request before your code runs.
+verify_jwt = false
+import_map = "./functions/postal-cities/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/postal-cities/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/postal-cities/*.html" ]
+
+[functions.merchant_review_decide]
+enabled = true
+# NOTE:
+# Some clients (especially during auth refresh / web) can hit Supabase Functions
+# with a token that the gateway rejects as "Invalid JWT" before the function code
+# runs. We do our own auth+admin authorization inside the function anyway
+# (client.auth.getUser() + profiles.role check), so disable gateway JWT
+# verification to avoid false negatives.
+verify_jwt = false
+import_map = "./functions/merchant_review_decide/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/merchant_review_decide/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/merchant_review_decide/*.html" ]
+
+[functions.kyc_create_signed_url]
+enabled = true
+verify_jwt = true
+import_map = "./functions/kyc_create_signed_url/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/kyc_create_signed_url/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/kyc_create_signed_url/*.html" ]
+
+[functions.payment_intent_create]
+enabled = true
+verify_jwt = true
+import_map = "./functions/payment_intent_create/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/payment_intent_create/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/payment_intent_create/*.html" ]
+
+[functions.payment_intent_resolve]
+enabled = true
+# IMPORTANT (Web/CORS): When verify_jwt is true, Supabase can reject browser preflight
+# (OPTIONS) or invalid/expired JWTs before our function runs, and that rejection
+# may not include CORS headers. That surfaces in Flutter Web as
+# `ClientException: Failed to fetch`.
+#
+# We therefore disable the platform JWT gate and instead validate the caller JWT
+# inside the function via `supabase.auth.getUser()`.
+verify_jwt = false
+import_map = "./functions/payment_intent_resolve/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/payment_intent_resolve/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/payment_intent_resolve/*.html" ]
+
+[functions.coupons_list]
+enabled = true
+verify_jwt = true
+import_map = "./functions/coupons_list/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/coupons_list/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/coupons_list/*.html" ]
+
+[functions.merchant_logo_signed_url]
+enabled = true
+verify_jwt = true
+import_map = "./functions/merchant_logo_signed_url/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/merchant_logo_signed_url/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/merchant_logo_signed_url/*.html" ]
