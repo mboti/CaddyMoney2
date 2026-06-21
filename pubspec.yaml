@@ -51,12 +51,21 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  windows: true
-  macos: true
-  linux: true
-  web: true
   image_path: assets/icons/app_icon.png
-  # Android adaptive icon (recommended for best quality on modern launchers)
+
   adaptive_icon_foreground: assets/icons/app_icon.png
   adaptive_icon_background: "#FFFFFF"
   remove_alpha_ios: true
+
+  windows:
+    generate: true
+    image_path: assets/icons/app_icon.png
+    icon_size: 256
+
+  macos:
+    generate: true
+    image_path: assets/icons/app_icon.png
+
+  linux:
+    generate: true
+    image_path: assets/icons/app_icon.png
